@@ -1498,7 +1498,7 @@ body.menu-open .site-nav {
 
 @media (min-width: 1120px) {
   .release-rail {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-auto-flow: row;
     gap: 1.2rem;
     margin-right: 0;

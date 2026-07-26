@@ -67,9 +67,54 @@ if ("IntersectionObserver" in window && !reduceMotion.matches) {
 }
 
 const playButtons = document.querySelectorAll(".release-play");
-const playerFrame = document.querySelector("[data-player-frame]");
+const spotifyEmbedTarget = document.querySelector("[data-spotify-embed]");
 const playerTitle = document.querySelector("[data-player-title]");
+const playerStatus = document.querySelector(".player-status");
 const player = document.querySelector("#music-player");
+let spotifyController = null;
+let spotifyReady = false;
+let queuedRelease = null;
+let currentAlbumId = "1i4UJj3WxyFzxOMNahmY0j";
+
+const startRelease = ({ albumId, releaseTitle }) => {
+  if (!spotifyController || !spotifyReady) {
+    queuedRelease = { albumId, releaseTitle };
+    return;
+  }
+
+  if (currentAlbumId !== albumId) {
+    spotifyController.loadEntity(`spotify:album:${albumId}`);
+    currentAlbumId = albumId;
+  }
+
+  spotifyController.play();
+};
+
+window.onSpotifyIframeApiReady = (IFrameAPI) => {
+  if (!spotifyEmbedTarget) return;
+
+  IFrameAPI.createController(spotifyEmbedTarget, {
+    width: "100%",
+    height: 152,
+    uri: `spotify:album:${currentAlbumId}`
+  }, (EmbedController) => {
+    spotifyController = EmbedController;
+
+    spotifyController.addListener("ready", () => {
+      spotifyReady = true;
+
+      if (queuedRelease) {
+        const release = queuedRelease;
+        queuedRelease = null;
+        startRelease(release);
+      }
+    });
+
+    spotifyController.addListener("playback_started", () => {
+      playerStatus.textContent = "Now playing";
+    });
+  });
+};
 
 playButtons.forEach((button) => {
   button.setAttribute("aria-pressed", "false");
@@ -87,14 +132,8 @@ playButtons.forEach((button) => {
     button.setAttribute("aria-pressed", "true");
     button.querySelector("span").textContent = "♪";
     playerTitle.textContent = releaseTitle;
-
-    const iframe = document.createElement("iframe");
-    iframe.src = `https://open.spotify.com/embed/album/${albumId}?utm_source=generator&theme=0`;
-    iframe.title = `${releaseTitle} by Sophie Thomasdotter on Spotify`;
-    iframe.loading = "lazy";
-    iframe.allow = "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture";
-    iframe.setAttribute("allowfullscreen", "");
-    playerFrame.replaceChildren(iframe);
+    playerStatus.textContent = "Starting playback";
+    startRelease({ albumId, releaseTitle });
 
     if (window.matchMedia("(max-width: 759px)").matches) {
       player.scrollIntoView({

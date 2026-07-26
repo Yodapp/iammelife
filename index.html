@@ -216,14 +216,14 @@
 
         <div class="music-player reveal" id="music-player" aria-live="polite">
           <div class="player-copy">
-            <span class="player-status">Choose a song above</span>
-            <h3 data-player-title>A chapter is waiting.</h3>
-            <p>Listen without leaving Sophie’s story.</p>
+            <span class="player-status">Featured release</span>
+            <h3 data-player-title>Ett modigt hjärta</h3>
+            <p>Tap any cover to listen without leaving Sophie’s story.</p>
           </div>
           <div class="player-frame" data-player-frame>
-            <div class="player-placeholder">
+            <div class="player-placeholder" data-spotify-embed>
               <span aria-hidden="true">♪</span>
-              <p>Tap play on a cover</p>
+              <p>Loading the Spotify player</p>
             </div>
           </div>
         </div>
@@ -316,5 +316,6 @@
   </div>
 
   <script src="script.js"></script>
+  <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
 </body>
 </html>

@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Manrope:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20260727-cta">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -56,6 +56,13 @@
         <p class="eyebrow">A life rewritten</p>
         <h1 id="hero-title">Sophie<br>Thomasdotter</h1>
         <p class="hero-roles">Songwriter <span>·</span> Author <span>·</span> Stroke survivor</p>
+        <div class="hero-ctas">
+          <a class="hero-primary" href="#music">
+            <span>Listen to her music</span>
+            <i aria-hidden="true">♪</i>
+          </a>
+          <a class="hero-secondary" href="#book">Discover the book <span aria-hidden="true">→</span></a>
+        </div>
       </div>
 
       <div class="hero-edition" aria-hidden="true">
@@ -65,7 +72,7 @@
       </div>
 
       <a class="hero-entry" href="#story">
-        <span>Begin her story</span>
+        <span>Continue into her story</span>
         <i aria-hidden="true"><b>&#8203;</b></i>
       </a>
     </section>
@@ -144,8 +151,11 @@
           </article>
 
           <button class="story-reader-trigger reveal" type="button" data-reader-open>
-            <span>Read Sophie’s words</span>
-            <i aria-hidden="true">Open the story ↗</i>
+            <span>
+              <small>In her own words</small>
+              <strong>Read Sophie’s story</strong>
+            </span>
+            <i aria-hidden="true">↗</i>
           </button>
         </div>
       </div>
@@ -177,7 +187,8 @@
           </button>
         </header>
 
-        <div class="reader-grid">
+        <div class="reader-scroll" data-reader-scroll>
+          <div class="reader-grid">
           <article>
             <span>01 · Love that remains</span>
             <h3>Some relationships do not end because we choose to leave.</h3>
@@ -209,15 +220,16 @@
             <p>I wrote a book to help others reflect on their own lives. I write music in the hope that people will pause and truly listen. Not to make myself a victim — but to show that change is possible.</p>
             <blockquote>To begin again. Not from zero, but from a new angle.</blockquote>
           </article>
-        </div>
-
-        <footer class="reader-footer">
-          <img src="assets/iamme-mark.webp" alt="I Am Me — author, songwriter, coach and stroke survivor" loading="lazy" width="1254" height="1254">
-          <div>
-            <p>“We do not need to know the whole road. We only need to find the courage to begin walking.”</p>
-            <span>With all my love · Sophie</span>
           </div>
-        </footer>
+
+          <footer class="reader-footer">
+            <img src="assets/iamme-mark.webp" alt="I Am Me — author, songwriter, coach and stroke survivor" loading="lazy" width="1254" height="1254">
+            <div>
+              <p>“We do not need to know the whole road. We only need to find the courage to begin walking.”</p>
+              <span>With all my love · Sophie</span>
+            </div>
+          </footer>
+        </div>
       </div>
     </dialog>
 
@@ -458,12 +470,17 @@
     </div>
   </footer>
 
-  <div class="mobile-actions" aria-label="Quick links">
-    <a href="#music"><span aria-hidden="true">♪</span> Music</a>
-    <a href="#book"><span aria-hidden="true">◇</span> The book</a>
+  <div class="mobile-actions" aria-label="Suggested next step">
+    <a href="#music" data-contextual-action>
+      <span>
+        <small data-contextual-kicker>Next chapter</small>
+        <strong data-contextual-label>Listen to the music</strong>
+      </span>
+      <i aria-hidden="true">→</i>
+    </a>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=20260727-cta"></script>
   <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
 </body>
 </html>

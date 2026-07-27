@@ -7,20 +7,40 @@ const progress = document.querySelector(".scroll-progress span");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const parallaxItems = document.querySelectorAll("[data-parallax]");
 const heroSection = document.querySelector(".hero");
+const musicSection = document.querySelector(".music");
 const bookSection = document.querySelector(".book");
 const mobileActions = document.querySelector(".mobile-actions");
+const contextualAction = document.querySelector("[data-contextual-action]");
+const contextualKicker = document.querySelector("[data-contextual-kicker]");
+const contextualLabel = document.querySelector("[data-contextual-label]");
 
 const updateMobileActions = () => {
-  if (!heroSection || !bookSection || !mobileActions) return;
+  if (!heroSection || !musicSection || !bookSection || !mobileActions || !contextualAction) return;
 
   const viewportHeight = window.innerHeight;
   const heroRect = heroSection.getBoundingClientRect();
+  const musicRect = musicSection.getBoundingClientRect();
   const bookRect = bookSection.getBoundingClientRect();
   const hasLeftHero = heroRect.bottom <= viewportHeight * 0.72;
-  const bookIsNear = bookRect.top <= viewportHeight * 0.82
-    && bookRect.bottom >= viewportHeight * 0.18;
+  const readingLine = viewportHeight * 0.52;
+  const isInMusic = musicRect.top <= readingLine && musicRect.bottom > readingLine;
+  const isInBook = bookRect.top <= readingLine && bookRect.bottom > readingLine;
 
-  mobileActions.classList.toggle("is-visible", hasLeftHero && !bookIsNear);
+  if (isInMusic) {
+    contextualAction.href = "#book";
+    contextualKicker.textContent = "Continue the story";
+    contextualLabel.textContent = "Discover the book";
+  } else if (isInBook) {
+    contextualAction.href = "#music";
+    contextualKicker.textContent = "Hear her words";
+    contextualLabel.textContent = "Listen to the music";
+  } else {
+    contextualAction.href = "#music";
+    contextualKicker.textContent = "Next chapter";
+    contextualLabel.textContent = "Listen to the music";
+  }
+
+  mobileActions.classList.toggle("is-visible", hasLeftHero);
 };
 
 const setMenu = (open) => {
@@ -119,6 +139,7 @@ if ("IntersectionObserver" in window && storyPortrait) {
 const storyReader = document.querySelector("[data-story-reader]");
 const readerOpen = document.querySelector("[data-reader-open]");
 const readerClose = document.querySelector("[data-reader-close]");
+const readerScroll = document.querySelector("[data-reader-scroll]");
 let readerReturnFocus = null;
 
 const closeStoryReader = () => {
@@ -129,15 +150,19 @@ const closeStoryReader = () => {
 readerOpen?.addEventListener("click", () => {
   readerReturnFocus = document.activeElement;
   document.body.classList.add("reader-open");
-  storyReader.scrollTop = 0;
   storyReader.showModal();
-  readerClose.focus();
+  readerScroll.scrollTop = 0;
+  window.requestAnimationFrame(() => {
+    readerScroll.scrollTop = 0;
+    readerClose.focus({ preventScroll: true });
+  });
 });
 
 readerClose?.addEventListener("click", closeStoryReader);
 
 storyReader?.addEventListener("close", () => {
   document.body.classList.remove("reader-open");
+  readerScroll.scrollTop = 0;
   readerReturnFocus?.focus();
 });
 

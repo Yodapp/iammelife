@@ -10,13 +10,15 @@
   --parchment: #f0e8cf;
   --paper: #e8dfc5;
   --white: #fbf8ed;
-  --muted: rgba(240, 232, 207, 0.66);
+  --muted: rgba(240, 232, 207, 0.78);
   --line: rgba(227, 215, 178, 0.2);
   --serif: "Cormorant Garamond", Georgia, serif;
   --sans: "Manrope", system-ui, sans-serif;
   --script: "Caveat", "Segoe Print", cursive;
   --shell: min(1180px, calc(100vw - 2rem));
   --section-space: clamp(6rem, 15vw, 11rem);
+  --copy-size: clamp(1.0625rem, 4.2vw, 1.15rem);
+  --copy-line-height: 1.75;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
@@ -47,7 +49,7 @@ body {
     var(--ink);
   color: var(--parchment);
   font-family: var(--sans);
-  font-size: 1rem;
+  font-size: 1.0625rem;
   font-weight: 300;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
@@ -2493,6 +2495,95 @@ body.reader-open .mobile-actions {
   .story-fragment {
     padding-inline: 1rem;
   }
+}
+
+/* Accessible reading scale */
+.story-copy,
+.chapter p:last-child,
+.section-heading .section-intro,
+.player-copy > p,
+.book-description,
+.journey-intro,
+.story-fragment > p:last-child,
+.reader-grid p,
+.connect-intro,
+.final-line {
+  font-size: var(--copy-size);
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  line-height: var(--copy-line-height);
+}
+
+.story-copy {
+  color: rgba(240, 232, 207, 0.84);
+}
+
+.book-description {
+  color: rgba(240, 232, 207, 0.78);
+}
+
+.book-caption,
+.story-portrait > p {
+  color: rgba(240, 232, 207, 0.72);
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.eyebrow,
+.section-kicker p,
+.chapter-label,
+.release-meta > p,
+.player-status {
+  font-size: 0.7rem;
+}
+
+.section-kicker span {
+  font-size: 0.9rem;
+}
+
+.button,
+.hero-primary {
+  font-size: 0.72rem;
+}
+
+.hero-roles {
+  font-size: clamp(0.68rem, 2.8vw, 0.8rem);
+}
+
+.hero-entry,
+.menu-toggle-label {
+  font-size: 0.68rem;
+}
+
+.release-meta a,
+.player-placeholder {
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.story-reader-trigger small,
+.reader-grid article > span,
+.reader-header button,
+.reader-footer span {
+  font-size: 0.68rem;
+}
+
+.reader-grid p {
+  max-width: 36rem;
+}
+
+.mobile-actions small {
+  font-size: 0.62rem;
+}
+
+.mobile-actions strong {
+  font-size: 1.16rem;
+}
+
+.site-footer {
+  color: rgba(240, 232, 207, 0.68);
+  font-size: 0.75rem;
+  line-height: 1.65;
 }
 
 @media (prefers-reduced-motion: reduce) {

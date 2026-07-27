@@ -6,6 +6,22 @@ const navigation = document.querySelector(".site-nav");
 const progress = document.querySelector(".scroll-progress span");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const parallaxItems = document.querySelectorAll("[data-parallax]");
+const heroSection = document.querySelector(".hero");
+const bookSection = document.querySelector(".book");
+const mobileActions = document.querySelector(".mobile-actions");
+
+const updateMobileActions = () => {
+  if (!heroSection || !bookSection || !mobileActions) return;
+
+  const viewportHeight = window.innerHeight;
+  const heroRect = heroSection.getBoundingClientRect();
+  const bookRect = bookSection.getBoundingClientRect();
+  const hasLeftHero = heroRect.bottom <= viewportHeight * 0.72;
+  const bookIsNear = bookRect.top <= viewportHeight * 0.82
+    && bookRect.bottom >= viewportHeight * 0.18;
+
+  mobileActions.classList.toggle("is-visible", hasLeftHero && !bookIsNear);
+};
 
 const setMenu = (open) => {
   body.classList.toggle("menu-open", open);
@@ -35,6 +51,7 @@ const updateScrollState = () => {
   const scrollRange = document.documentElement.scrollHeight - window.innerHeight;
   header.classList.toggle("is-scrolled", scrollTop > 24);
   progress.style.transform = `scaleX(${scrollRange > 0 ? scrollTop / scrollRange : 0})`;
+  updateMobileActions();
 
   if (!reduceMotion.matches) {
     parallaxItems.forEach((item) => {
@@ -55,6 +72,8 @@ window.addEventListener("scroll", () => {
     scrollTicking = true;
   }
 }, { passive: true });
+
+window.addEventListener("resize", updateMobileActions, { passive: true });
 
 updateScrollState();
 

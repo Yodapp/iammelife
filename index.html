@@ -43,13 +43,14 @@
 
   <main id="main">
     <section class="hero" id="top" aria-labelledby="hero-title">
-      <picture class="hero-media">
+      <picture class="hero-media" data-parallax data-parallax-speed="0.08">
         <source media="(max-width: 720px)" type="image/webp" srcset="assets/hero-square.webp">
         <source type="image/webp" srcset="assets/hero-wide.webp">
         <img src="hero.jpg" alt="Sophie Thomasdotter looking into a mirror, surrounded by deep green foliage and warm candlelight">
       </picture>
       <div class="hero-shade" aria-hidden="true"></div>
-      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-glow" data-parallax data-parallax-speed="-0.04" aria-hidden="true"></div>
+      <div class="hero-inscription" aria-hidden="true">I AM ME</div>
 
       <div class="hero-content">
         <p class="eyebrow">A life rewritten</p>
@@ -59,6 +60,12 @@
           <a class="button button-solid" href="#music">Listen to the music</a>
           <a class="button button-ghost" href="#story">Enter her story</a>
         </div>
+      </div>
+
+      <div class="hero-edition" aria-hidden="true">
+        <span>EST. IN TRUTH</span>
+        <i>&#8203;</i>
+        <span>WORDS · MUSIC · LIFE</span>
       </div>
 
       <a class="scroll-cue" href="#story" aria-label="Scroll to Sophie's story">
@@ -91,41 +98,132 @@
       </div>
     </section>
 
-    <section class="chapters section" aria-labelledby="chapters-title">
-      <div class="section-shell">
-        <div class="chapters-heading">
-          <p class="eyebrow reveal">Fragments of a life</p>
-          <h2 class="display-title reveal" id="chapters-title">The story is still<br>being written.</h2>
+    <section class="story-journey section" aria-labelledby="journey-title">
+      <div class="story-aurora" aria-hidden="true"></div>
+      <div class="section-shell journey-heading">
+        <div>
+          <p class="eyebrow reveal">Fragments in her own voice</p>
+          <h2 class="display-title reveal" id="journey-title">The truths<br>that remain.</h2>
         </div>
+        <p class="journey-intro reveal">Words written in the quiet after the storm — about loss, self-worth, finding a voice, and beginning again.</p>
+      </div>
 
-        <div class="chapter-list">
-          <article class="chapter reveal">
-            <span class="chapter-number">I</span>
-            <div>
-              <p class="chapter-label">Identity</p>
-              <h3>The person in the mirror</h3>
-              <p>How much of yourself can you lose before you no longer recognize who you are?</p>
-            </div>
+      <div class="section-shell story-stage">
+        <aside class="story-portrait reveal" aria-label="Portrait of Sophie Thomasdotter">
+          <div class="portrait-frame" data-parallax data-parallax-speed="0.035">
+            <img src="assets/sophie-portrait.webp" alt="A quiet close portrait of Sophie Thomasdotter" loading="lazy" width="1254" height="1254">
+            <div class="portrait-wash" aria-hidden="true"></div>
+            <span class="portrait-coordinate" aria-hidden="true">57°42′N · A MOMENT OF TRUTH</span>
+          </div>
+          <p>Sophie, in the quiet between chapters.</p>
+        </aside>
+
+        <div class="story-sequence">
+          <article class="story-fragment reveal" data-story-scene="loss">
+            <span class="story-roman" aria-hidden="true">I</span>
+            <p class="chapter-label">On love &amp; loss</p>
+            <blockquote>“Love does not die when a person does. It only changes form.”</blockquote>
+            <p>We do not leave those relationships behind. We learn to carry them forward without the physical presence.</p>
           </article>
-          <article class="chapter reveal">
-            <span class="chapter-number">II</span>
-            <div>
-              <p class="chapter-label">Survival</p>
-              <h3>When everything stopped</h3>
-              <p>A massive stroke forced life into stillness — and made the truths hidden beneath the noise impossible to ignore.</p>
-            </div>
+
+          <article class="story-fragment reveal" data-story-scene="self">
+            <span class="story-roman" aria-hidden="true">II</span>
+            <p class="chapter-label">On choosing herself</p>
+            <blockquote>“Today, I choose myself.”</blockquote>
+            <p>Not because I stopped loving — but because I finally chose to love the person who should always have come first.</p>
           </article>
-          <article class="chapter reveal">
-            <span class="chapter-number">III</span>
-            <div>
-              <p class="chapter-label">Reclamation</p>
-              <h3>The way back to herself</h3>
-              <p>Music became a voice. Writing became a witness. The journey back became a story worth sharing.</p>
-            </div>
+
+          <article class="story-fragment reveal" data-story-scene="voice">
+            <span class="story-roman" aria-hidden="true">III</span>
+            <p class="chapter-label">On the noise</p>
+            <blockquote>“You knew the way all along.”</blockquote>
+            <p>The truth rarely shouts. It waits for the storm to settle, until you can hear your own voice again.</p>
           </article>
+
+          <article class="story-fragment reveal" data-story-scene="begin">
+            <span class="story-roman" aria-hidden="true">IV</span>
+            <p class="chapter-label">On beginning again</p>
+            <blockquote>“Not from zero. From a new angle.”</blockquote>
+            <p>New conditions. New tools. The same determination to keep moving — and perhaps help someone else find their way.</p>
+          </article>
+
+          <button class="story-reader-trigger reveal" type="button" data-reader-open>
+            <span>Read Sophie’s words</span>
+            <i aria-hidden="true">Open the story ↗</i>
+          </button>
         </div>
       </div>
     </section>
+
+    <section class="becoming-interlude" aria-label="A thought on healing">
+      <div class="becoming-lines" aria-hidden="true"></div>
+      <img class="becoming-mark" src="assets/iamme-mark.webp" alt="" loading="lazy" width="1254" height="1254">
+      <div class="becoming-copy section-shell reveal">
+        <p class="eyebrow">The art of becoming</p>
+        <blockquote>
+          Healing isn’t about becoming who you were.
+          <strong>It’s about discovering who you can become.</strong>
+        </blockquote>
+        <span>I AM ME · A LIFE STILL UNFOLDING</span>
+      </div>
+    </section>
+
+    <dialog class="story-reader" data-story-reader aria-labelledby="reader-title">
+      <div class="reader-shell">
+        <header class="reader-header">
+          <div>
+            <p class="eyebrow">Sophie Thomasdotter · In her own words</p>
+            <h2 id="reader-title">Notes from a life<br>being rewritten.</h2>
+          </div>
+          <button type="button" data-reader-close aria-label="Close Sophie’s story">
+            <span>Close</span>
+            <i aria-hidden="true">&#8203;</i>
+          </button>
+        </header>
+
+        <div class="reader-grid">
+          <article>
+            <span>01 · Love that remains</span>
+            <h3>Some relationships do not end because we choose to leave.</h3>
+            <p>They end because life chooses for us. One day, someone is there. The next, they are not. We never get to say: “I am not finished yet.”</p>
+            <p>I do not believe time heals every wound. I believe we learn to breathe around the pain, building a life where grief is allowed to exist without taking up all the space.</p>
+            <blockquote>Love does not die when a person does. It only changes form.</blockquote>
+          </article>
+
+          <article>
+            <span>02 · A letter to herself</span>
+            <h3>You did not stay because you were weak.</h3>
+            <p>You stayed because your heart has always believed in the good in people. But loving someone’s potential can slowly make you abandon who you already are.</p>
+            <p>Love should never require you to give up your safety, your self-respect or your sense of worth. The day you have to fight to be chosen is the day you already have your answer.</p>
+            <blockquote>Today, I choose myself.</blockquote>
+          </article>
+
+          <article>
+            <span>03 · The voice beneath the noise</span>
+            <h3>Sometimes it is not the darkness that makes us lose our way.</h3>
+            <p>It is the noise — every feeling speaking at once, every memory asking to be heard, every fear shouting louder than hope can whisper.</p>
+            <p>Truth rarely raises its voice. It waits. And when the storm begins to settle, it returns as a quiet reminder.</p>
+            <blockquote>You knew the way all along. You only needed to find your way back to your own voice.</blockquote>
+          </article>
+
+          <article>
+            <span>04 · Her unfinished house</span>
+            <h3>No expectations. Only hope, determination and the will to continue.</h3>
+            <p>My house is far from finished, and sometimes the nails still go in crooked. I remain a student of life, even when my experiences allow me to guide someone else.</p>
+            <p>I wrote a book to help others reflect on their own lives. I write music in the hope that people will pause and truly listen. Not to make myself a victim — but to show that change is possible.</p>
+            <blockquote>To begin again. Not from zero, but from a new angle.</blockquote>
+          </article>
+        </div>
+
+        <footer class="reader-footer">
+          <img src="assets/iamme-mark.webp" alt="I Am Me — author, songwriter, coach and stroke survivor" loading="lazy" width="1254" height="1254">
+          <div>
+            <p>“We do not need to know the whole road. We only need to find the courage to begin walking.”</p>
+            <span>With all my love · Sophie</span>
+          </div>
+        </footer>
+      </div>
+    </dialog>
 
     <section class="music section" id="music" aria-labelledby="music-title">
       <div class="music-haze" aria-hidden="true"></div>
@@ -140,6 +238,11 @@
             <h2 class="display-title reveal" id="music-title">Let the music<br>speak.</h2>
           </div>
           <p class="section-intro reveal">Every song carries a piece of Sophie’s journey. Choose a chapter and listen here, or continue to Spotify.</p>
+        </div>
+
+        <div class="music-marquee reveal" aria-hidden="true">
+          <span>SONGS BECOME CHAPTERS · CHAPTERS BECOME A LIFE ·&nbsp;</span>
+          <span>SONGS BECOME CHAPTERS · CHAPTERS BECOME A LIFE ·&nbsp;</span>
         </div>
 
         <div class="release-rail" aria-label="Sophie Thomasdotter releases">
@@ -300,6 +403,7 @@
             <p>When a massive stroke forced everything to stop, it became impossible to ignore the truths she had spent a lifetime avoiding.</p>
             <p><em>I Am Me</em> is a raw and deeply personal memoir about finding the strength to reclaim your voice, your worth and your identity.</p>
           </div>
+          <p class="book-pullquote reveal">“I did not write to make myself a victim. I wrote to show that change is possible.”</p>
           <a class="button button-dark reveal" href="https://amzn.eu/d/0hDtHTWC" target="_blank" rel="noopener noreferrer">Discover the book on Amazon <span aria-hidden="true">↗</span></a>
         </div>
       </div>
@@ -319,6 +423,7 @@
       <div class="section-shell">
         <p class="eyebrow reveal">Stay close</p>
         <h2 class="display-title reveal" id="connect-title">New songs.<br>New words.<br>New chapters.</h2>
+        <p class="connect-intro reveal">Her work is still unfolding — as a writer, songwriter, survivor, and a future guide for those finding their own way back.</p>
 
         <div class="social-grid reveal">
           <a href="https://instagram.com/thomasdotter78" target="_blank" rel="noopener noreferrer">

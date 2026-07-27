@@ -5,6 +5,7 @@ const menuLabel = document.querySelector(".menu-toggle-label");
 const navigation = document.querySelector(".site-nav");
 const progress = document.querySelector(".scroll-progress span");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const parallaxItems = document.querySelectorAll("[data-parallax]");
 
 const setMenu = (open) => {
   body.classList.toggle("menu-open", open);
@@ -34,6 +35,17 @@ const updateScrollState = () => {
   const scrollRange = document.documentElement.scrollHeight - window.innerHeight;
   header.classList.toggle("is-scrolled", scrollTop > 24);
   progress.style.transform = `scaleX(${scrollRange > 0 ? scrollTop / scrollRange : 0})`;
+
+  if (!reduceMotion.matches) {
+    parallaxItems.forEach((item) => {
+      const speed = Number(item.dataset.parallaxSpeed || 0.04);
+      const rect = item.getBoundingClientRect();
+      const distanceFromCenter = rect.top + (rect.height / 2) - (window.innerHeight / 2);
+      const offset = Math.max(-70, Math.min(70, distanceFromCenter * speed));
+      item.style.setProperty("--parallax-y", `${offset.toFixed(2)}px`);
+    });
+  }
+
   scrollTicking = false;
 };
 
@@ -64,6 +76,73 @@ if ("IntersectionObserver" in window && !reduceMotion.matches) {
   revealItems.forEach((item) => revealObserver.observe(item));
 } else {
   revealItems.forEach((item) => item.classList.add("is-visible"));
+}
+
+const storyFragments = document.querySelectorAll(".story-fragment");
+const storyPortrait = document.querySelector(".story-portrait");
+
+if ("IntersectionObserver" in window && storyPortrait) {
+  const storyObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        storyPortrait.classList.add("is-awake");
+        storyPortrait.dataset.activeScene = entry.target.dataset.storyScene;
+      }
+    });
+  }, {
+    threshold: 0.55,
+    rootMargin: "-10% 0px -10% 0px"
+  });
+
+  storyFragments.forEach((fragment) => storyObserver.observe(fragment));
+}
+
+const storyReader = document.querySelector("[data-story-reader]");
+const readerOpen = document.querySelector("[data-reader-open]");
+const readerClose = document.querySelector("[data-reader-close]");
+let readerReturnFocus = null;
+
+const closeStoryReader = () => {
+  if (!storyReader?.open) return;
+  storyReader.close();
+};
+
+readerOpen?.addEventListener("click", () => {
+  readerReturnFocus = document.activeElement;
+  document.body.classList.add("reader-open");
+  storyReader.scrollTop = 0;
+  storyReader.showModal();
+  readerClose.focus();
+});
+
+readerClose?.addEventListener("click", closeStoryReader);
+
+storyReader?.addEventListener("close", () => {
+  document.body.classList.remove("reader-open");
+  readerReturnFocus?.focus();
+});
+
+storyReader?.addEventListener("click", (event) => {
+  if (event.target === storyReader) {
+    closeStoryReader();
+  }
+});
+
+const bookVisual = document.querySelector(".book-visual");
+
+if (bookVisual && !reduceMotion.matches && window.matchMedia("(hover: hover)").matches) {
+  bookVisual.addEventListener("pointermove", (event) => {
+    const rect = bookVisual.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+    bookVisual.style.setProperty("--book-rotate-y", `${(x * 7).toFixed(2)}deg`);
+    bookVisual.style.setProperty("--book-rotate-x", `${(y * -5).toFixed(2)}deg`);
+  });
+
+  bookVisual.addEventListener("pointerleave", () => {
+    bookVisual.style.removeProperty("--book-rotate-y");
+    bookVisual.style.removeProperty("--book-rotate-x");
+  });
 }
 
 const playButtons = document.querySelectorAll(".release-play");

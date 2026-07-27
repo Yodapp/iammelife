@@ -10,7 +10,10 @@
   --parchment: #f0e8cf;
   --paper: #e8dfc5;
   --white: #fbf8ed;
-  --muted: rgba(240, 232, 207, 0.78);
+  --text-body: rgba(232, 218, 188, 0.9);
+  --text-soft: rgba(218, 204, 173, 0.78);
+  --text-quote: #ead8aa;
+  --muted: var(--text-body);
   --line: rgba(227, 215, 178, 0.2);
   --serif: "Cormorant Garamond", Georgia, serif;
   --sans: "Manrope", system-ui, sans-serif;
@@ -2508,6 +2511,7 @@ body.reader-open .mobile-actions {
 .reader-grid p,
 .connect-intro,
 .final-line {
+  color: var(--text-body);
   font-size: var(--copy-size);
   font-weight: 400;
   letter-spacing: 0.005em;
@@ -2515,16 +2519,16 @@ body.reader-open .mobile-actions {
 }
 
 .story-copy {
-  color: rgba(240, 232, 207, 0.84);
+  color: var(--text-body);
 }
 
 .book-description {
-  color: rgba(240, 232, 207, 0.78);
+  color: var(--text-body);
 }
 
 .book-caption,
 .story-portrait > p {
-  color: rgba(240, 232, 207, 0.72);
+  color: var(--text-soft);
   font-size: 1.05rem;
   line-height: 1.55;
 }
@@ -2581,9 +2585,18 @@ body.reader-open .mobile-actions {
 }
 
 .site-footer {
-  color: rgba(240, 232, 207, 0.68);
+  color: var(--text-soft);
   font-size: 0.75rem;
   line-height: 1.65;
+}
+
+.manifesto p,
+.story-fragment blockquote,
+.reader-grid blockquote,
+.reader-footer p,
+.book-hook,
+.book-pullquote {
+  color: var(--text-quote);
 }
 
 @media (prefers-reduced-motion: reduce) {

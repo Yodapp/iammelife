@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Manrope:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260828-new-music">
+  <link rel="stylesheet" href="styles.css?v=20260828-release-feature">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -56,18 +56,17 @@
         <p class="eyebrow">A life rewritten</p>
         <h1 id="hero-title">Sophie<br>Thomasdotter</h1>
         <p class="hero-roles">Songwriter <span>·</span> Author <span>·</span> Stroke survivor</p>
-        <a class="hero-release" href="#music" aria-label="Listen to Sophie's new release, Breathless">
-          <span>New music</span>
-          <strong>Breathless</strong>
-          <i aria-hidden="true">↗</i>
-        </a>
-        <div class="hero-ctas">
-          <a class="hero-primary" href="#music">
-            <span>Listen to Breathless</span>
+        <button class="hero-release" type="button" data-featured-release data-album="1WvhcnFCrhbjgsd5tt1UiC" data-release-date="2026-08-28" aria-label="Listen to Sophie's new release, Breathless">
+          <span class="hero-release-copy">
+            <small data-featured-kicker>New release · 28 Aug</small>
+            <strong data-featured-title>Breathless</strong>
+          </span>
+          <span class="hero-release-action">
+            <b data-featured-action>Listen now</b>
             <i aria-hidden="true">♪</i>
-          </a>
-          <a class="hero-secondary" href="#book">Discover the book <span aria-hidden="true">→</span></a>
-        </div>
+          </span>
+        </button>
+        <a class="hero-secondary" href="#book">Discover the book <span aria-hidden="true">→</span></a>
       </div>
 
       <div class="hero-edition" aria-hidden="true">
@@ -77,7 +76,7 @@
       </div>
 
       <a class="hero-entry" href="#story">
-        <span>Continue into her story</span>
+        <span>Scroll to explore</span>
         <i aria-hidden="true"><b>&#8203;</b></i>
       </a>
     </section>
@@ -262,7 +261,6 @@
           <article class="release-card release-card-latest reveal" data-release="Breathless" data-release-date="2026-08-28">
             <div class="release-art">
               <img src="assets/covers/breathless.jpg" alt="Breathless single cover" loading="eager" width="300" height="300">
-              <span class="release-badge">New release</span>
               <button class="release-play" type="button" data-album="1WvhcnFCrhbjgsd5tt1UiC" aria-label="Play Breathless here">
                 <span aria-hidden="true">▶</span>
               </button>
@@ -277,7 +275,6 @@
           <article class="release-card reveal" data-release="Don’t let me Disappear" data-release-date="2026-08-24">
             <div class="release-art">
               <img src="assets/covers/dont-let-me-disappear.jpg" alt="Don't let me Disappear single cover" loading="lazy" width="300" height="300">
-              <span class="release-badge">New release</span>
               <button class="release-play" type="button" data-album="2ENqaNqDo3R080QDl781Og" aria-label="Play Don't let me Disappear here">
                 <span aria-hidden="true">▶</span>
               </button>
@@ -317,7 +314,7 @@
             </div>
           </article>
 
-          <article class="release-card reveal" data-release="Ett modigt hjärta">
+          <article class="release-card reveal" data-release="Ett modigt hjärta" data-release-date="2026-07-26">
             <div class="release-art">
               <img src="assets/covers/ett-modigt-hjarta.jpg" alt="Ett modigt hjärta single cover" loading="lazy" width="300" height="300">
               <button class="release-play" type="button" data-album="1i4UJj3WxyFzxOMNahmY0j" aria-label="Play Ett modigt hjärta here">
@@ -331,7 +328,7 @@
             </div>
           </article>
 
-          <article class="release-card reveal" data-release="Just Me">
+          <article class="release-card reveal" data-release="Just Me" data-release-date="2026-06-05">
             <div class="release-art">
               <img src="assets/covers/just-me.jpg" alt="Just Me single cover" loading="lazy" width="300" height="300">
               <button class="release-play" type="button" data-album="7hJ10nk2LxseHWZKEHcYQe" aria-label="Play Just Me here">
@@ -345,7 +342,7 @@
             </div>
           </article>
 
-          <article class="release-card reveal" data-release="You are Trapped">
+          <article class="release-card reveal" data-release="You are Trapped" data-release-date="2026-06-23">
             <div class="release-art">
               <img src="assets/covers/you-are-trapped.jpg" alt="You are Trapped single cover" loading="lazy" width="300" height="300">
               <button class="release-play" type="button" data-album="23k66bQTokPTkhtuh8Xhy8" aria-label="Play You are Trapped here">
@@ -359,7 +356,7 @@
             </div>
           </article>
 
-          <article class="release-card reveal" data-release="Love doesn't Hurt">
+          <article class="release-card reveal" data-release="Love doesn't Hurt" data-release-date="2026-07-01">
             <div class="release-art">
               <img src="assets/covers/love-doesnt-hurt.jpg" alt="Love doesn't Hurt single cover" loading="lazy" width="300" height="300">
               <button class="release-play" type="button" data-album="3mdCLaKLHM7JQayQj5OkoJ" aria-label="Play Love doesn't Hurt here">
@@ -373,7 +370,7 @@
             </div>
           </article>
 
-          <article class="release-card reveal" data-release="För evigt inom">
+          <article class="release-card reveal" data-release="För evigt inom" data-release-date="2026-07-01">
             <div class="release-art">
               <img src="assets/covers/for-evigt-inom.jpg" alt="För evigt inom single cover" loading="lazy" width="300" height="300">
               <button class="release-play" type="button" data-album="6kIWtUNzrs8ek1k7I6VNQ7" aria-label="Play För evigt inom here">
@@ -387,7 +384,7 @@
             </div>
           </article>
 
-          <article class="release-card reveal" data-release="Still I'm free">
+          <article class="release-card reveal" data-release="Still I'm free" data-release-date="2026-07-26">
             <div class="release-art">
               <img src="assets/covers/still-im-free.jpg" alt="Still I'm free single cover" loading="lazy" width="640" height="640">
               <button class="release-play" type="button" data-album="3zRx8e6csMQ5eeD2edcWS3" aria-label="Play Still I'm free here">
@@ -401,7 +398,7 @@
             </div>
           </article>
 
-          <article class="release-card reveal" data-release="I Forgive Me">
+          <article class="release-card reveal" data-release="I Forgive Me" data-release-date="2026-07-26">
             <div class="release-art">
               <img src="assets/covers/i-forgive-me.jpg" alt="I Forgive Me single cover" loading="lazy" width="640" height="640">
               <button class="release-play" type="button" data-album="10S73W1lO8tybddfaDS7IC" aria-label="Play I Forgive Me here">
@@ -415,7 +412,7 @@
             </div>
           </article>
 
-          <article class="release-card reveal" data-release="Kärlekens ängar">
+          <article class="release-card reveal" data-release="Kärlekens ängar" data-release-date="2026-07-26">
             <div class="release-art">
               <img src="assets/covers/karlekens-angar.jpg" alt="Kärlekens ängar single cover" loading="lazy" width="640" height="640">
               <button class="release-play" type="button" data-album="1xtXTfZUJRKUDhwnw6541C" aria-label="Play Kärlekens ängar here">
@@ -543,7 +540,7 @@
     </a>
   </div>
 
-  <script src="script.js?v=20260727-cta"></script>
+  <script src="script.js?v=20260828-release-feature"></script>
   <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
 </body>
 </html>

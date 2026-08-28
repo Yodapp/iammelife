@@ -546,39 +546,80 @@ body.menu-open .site-nav {
 }
 
 .hero-release {
-  display: inline-flex;
+  display: grid;
+  width: min(18.5rem, calc(100vw - 2rem));
+  min-height: 4.25rem;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  gap: 0.55rem;
+  gap: 1rem;
   margin-top: 1.15rem;
-  padding: 0.48rem 0.62rem;
-  border: 1px solid rgba(239, 222, 171, 0.68);
-  background: rgba(11, 16, 9, 0.56);
-  box-shadow: 0 0.7rem 1.8rem rgba(0, 0, 0, 0.16);
+  padding: 0.72rem 0.72rem 0.72rem 1rem;
+  border: 1px solid rgba(239, 222, 171, 0.58);
+  border-radius: 0;
+  background: rgba(9, 14, 8, 0.68);
+  box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.2);
   color: var(--parchment);
-  font-size: 0.72rem;
-  line-height: 1;
+  line-height: 1.1;
+  text-align: left;
   opacity: 0;
+  backdrop-filter: blur(12px);
+  cursor: pointer;
   animation: rise-in 900ms var(--ease) 680ms forwards;
-  transition: border-color 250ms ease, background 250ms ease, transform 250ms var(--ease);
+  transition:
+    border-color 250ms ease,
+    background 250ms ease,
+    transform 250ms var(--ease);
 }
 
-.hero-release span {
+.hero-release-copy {
+  display: grid;
+  min-width: 0;
+  gap: 0.22rem;
+}
+
+.hero-release-copy small {
   color: var(--gold-light);
-  font-size: 0.57rem;
+  font-size: 0.58rem;
   font-weight: 700;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.14em;
+  line-height: 1.2;
   text-transform: uppercase;
 }
 
-.hero-release strong {
+.hero-release-copy strong {
+  overflow-wrap: anywhere;
   font-family: var(--serif);
-  font-size: 1rem;
+  font-size: 1.3rem;
   font-weight: 500;
+  line-height: 1;
 }
 
-.hero-release i {
+.hero-release-action {
+  display: grid;
+  min-width: 3.45rem;
+  justify-items: center;
+  gap: 0.32rem;
+}
+
+.hero-release-action b {
+  color: rgba(251, 248, 237, 0.78);
+  font-size: 0.53rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.hero-release-action i {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 1px solid rgba(239, 222, 171, 0.5);
+  border-radius: 50%;
+  background: rgba(240, 232, 207, 0.08);
   color: var(--gold-light);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-style: normal;
 }
 
@@ -588,64 +629,26 @@ body.menu-open .site-nav {
   background: rgba(18, 27, 15, 0.82);
 }
 
-.hero-ctas {
-  display: flex;
-  width: min(100%, 21rem);
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.75rem;
-  margin-top: 1.3rem;
-  opacity: 0;
-  animation: rise-in 1s var(--ease) 780ms forwards;
-}
-
-.hero-primary {
-  display: flex;
-  width: 100%;
-  min-height: 3.35rem;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.55rem 0.65rem 0.55rem 1.25rem;
-  border: 1px solid rgba(251, 248, 237, 0.62);
-  background: rgba(240, 232, 207, 0.96);
-  box-shadow: 0 1rem 2.8rem rgba(0, 0, 0, 0.28);
-  color: var(--ink);
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  transition:
-    transform 300ms var(--ease),
-    background 300ms ease;
-}
-
-.hero-primary i {
-  display: grid;
-  width: 2.1rem;
-  height: 2.1rem;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--ink);
-  color: var(--gold-light);
-  font-style: normal;
-}
-
-.hero-primary:hover {
-  transform: translateY(-0.15rem);
-  background: var(--white);
+.hero-release.is-evergreen .hero-release-copy strong {
+  font-size: 1.12rem;
+  line-height: 1.05;
 }
 
 .hero-secondary {
   display: inline-flex;
+  min-height: 3rem;
   align-items: center;
   gap: 0.7rem;
-  padding: 0.3rem 0;
+  margin-top: 0.65rem;
+  padding: 0.55rem 0;
   border-bottom: 1px solid rgba(234, 215, 157, 0.48);
   color: rgba(251, 248, 237, 0.88);
   font-family: var(--serif);
   font-size: 1.12rem;
   font-style: italic;
   line-height: 1;
+  opacity: 0;
+  animation: rise-in 900ms var(--ease) 780ms forwards;
 }
 
 .hero-secondary span {
@@ -1864,6 +1867,45 @@ body.reader-open .mobile-actions {
   }
 }
 
+@media (max-height: 700px) {
+  .hero-content {
+    padding-bottom: 6.6rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(3.4rem, 15vh, 6rem);
+  }
+
+  .hero-roles {
+    margin-top: 0.85rem;
+  }
+
+  .hero-release {
+    margin-top: 0.8rem;
+  }
+
+  .hero-secondary {
+    margin-top: 0.35rem;
+  }
+}
+
+@media (max-height: 450px) and (orientation: landscape) {
+  .hero-content {
+    padding-bottom: 1rem;
+  }
+
+  .hero-entry {
+    right: 1.5rem;
+    bottom: 1rem;
+    left: auto;
+    min-width: 0;
+    padding-block: 0.45rem;
+    transform: none;
+    opacity: 1;
+    animation: none;
+  }
+}
+
 /* Living memoir */
 [data-parallax] {
   --parallax-y: 0px;
@@ -2605,8 +2647,7 @@ body.reader-open .mobile-actions {
   font-size: 0.9rem;
 }
 
-.button,
-.hero-primary {
+.button {
   font-size: 0.72rem;
 }
 
@@ -2657,6 +2698,12 @@ body.reader-open .mobile-actions {
 .book-hook,
 .book-pullquote {
   color: var(--text-quote);
+}
+
+@media (max-height: 450px) and (orientation: landscape) {
+  .hero-edition {
+    display: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

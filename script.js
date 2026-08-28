@@ -189,6 +189,68 @@ if (bookVisual && !reduceMotion.matches && window.matchMedia("(hover: hover)").m
   });
 }
 
+const NEW_RELEASE_WINDOW_DAYS = 7;
+const DAY_IN_MS = 24 * 60 * 60 * 1000;
+const releaseCards = [...document.querySelectorAll(".release-card[data-release-date]")];
+const featuredRelease = document.querySelector("[data-featured-release]");
+const featuredKicker = document.querySelector("[data-featured-kicker]");
+const featuredTitle = document.querySelector("[data-featured-title]");
+const featuredAction = document.querySelector("[data-featured-action]");
+
+const parseReleaseDate = (dateString) => {
+  const [year, month, day] = dateString.split("-").map(Number);
+  return new Date(year, month - 1, day);
+};
+
+const startOfToday = new Date();
+startOfToday.setHours(0, 0, 0, 0);
+
+const isNewRelease = (dateString, referenceDate = startOfToday) => {
+  const releaseDate = parseReleaseDate(dateString);
+  const ageInDays = Math.floor((referenceDate - releaseDate) / DAY_IN_MS);
+  return ageInDays >= 0 && ageInDays < NEW_RELEASE_WINDOW_DAYS;
+};
+
+releaseCards.forEach((card) => {
+  if (!isNewRelease(card.dataset.releaseDate)) return;
+
+  const badge = document.createElement("span");
+  badge.className = "release-badge";
+  badge.textContent = "New release";
+  card.querySelector(".release-art")?.append(badge);
+});
+
+const latestReleaseCard = releaseCards.reduce((latest, card) => {
+  if (!latest) return card;
+  return card.dataset.releaseDate > latest.dataset.releaseDate ? card : latest;
+}, null);
+
+const latestReleaseIsNew = latestReleaseCard
+  ? isNewRelease(latestReleaseCard.dataset.releaseDate)
+  : false;
+
+if (featuredRelease && latestReleaseCard && latestReleaseIsNew) {
+  const latestButton = latestReleaseCard.querySelector(".release-play");
+  const dateLabel = new Intl.DateTimeFormat("en-GB", {
+    day: "numeric",
+    month: "short"
+  }).format(parseReleaseDate(latestReleaseCard.dataset.releaseDate));
+
+  featuredRelease.dataset.album = latestButton?.dataset.album || "";
+  featuredRelease.dataset.releaseDate = latestReleaseCard.dataset.releaseDate;
+  featuredKicker.textContent = `New release · ${dateLabel}`;
+  featuredTitle.textContent = latestReleaseCard.dataset.release;
+  featuredAction.textContent = "Listen now";
+  featuredRelease.setAttribute("aria-label", `Listen to Sophie's new release, ${latestReleaseCard.dataset.release}`);
+} else if (featuredRelease) {
+  featuredRelease.classList.add("is-evergreen");
+  featuredRelease.dataset.album = "";
+  featuredKicker.textContent = "Music";
+  featuredTitle.textContent = "Explore Sophie’s music";
+  featuredAction.textContent = "Explore";
+  featuredRelease.setAttribute("aria-label", "Explore Sophie’s music");
+}
+
 const playButtons = document.querySelectorAll(".release-play");
 const spotifyEmbedTarget = document.querySelector("[data-spotify-embed]");
 const playerTitle = document.querySelector("[data-player-title]");
@@ -239,32 +301,51 @@ window.onSpotifyIframeApiReady = (IFrameAPI) => {
   });
 };
 
+const activateRelease = (button, scrollTarget = null) => {
+  const card = button.closest(".release-card");
+  const albumId = button.dataset.album;
+  const releaseTitle = card.dataset.release;
+
+  playButtons.forEach((item) => {
+    item.setAttribute("aria-pressed", "false");
+    item.querySelector("span").textContent = "▶";
+  });
+
+  button.setAttribute("aria-pressed", "true");
+  button.querySelector("span").textContent = "♪";
+  playerTitle.textContent = releaseTitle;
+  playerStatus.textContent = "Starting playback";
+  startRelease({ albumId, releaseTitle });
+
+  scrollTarget?.scrollIntoView({
+    behavior: reduceMotion.matches ? "auto" : "smooth",
+    block: scrollTarget === musicSection ? "start" : "center"
+  });
+};
+
 playButtons.forEach((button) => {
   button.setAttribute("aria-pressed", "false");
 
   button.addEventListener("click", () => {
-    const card = button.closest(".release-card");
-    const albumId = button.dataset.album;
-    const releaseTitle = card.dataset.release;
-
-    playButtons.forEach((item) => {
-      item.setAttribute("aria-pressed", "false");
-      item.querySelector("span").textContent = "▶";
-    });
-
-    button.setAttribute("aria-pressed", "true");
-    button.querySelector("span").textContent = "♪";
-    playerTitle.textContent = releaseTitle;
-    playerStatus.textContent = "Starting playback";
-    startRelease({ albumId, releaseTitle });
-
-    if (window.matchMedia("(max-width: 759px)").matches) {
-      player.scrollIntoView({
-        behavior: reduceMotion.matches ? "auto" : "smooth",
-        block: "center"
-      });
-    }
+    const scrollTarget = window.matchMedia("(max-width: 759px)").matches ? player : null;
+    activateRelease(button, scrollTarget);
   });
+});
+
+featuredRelease?.addEventListener("click", () => {
+  const albumId = featuredRelease.dataset.album;
+  const releaseButton = albumId
+    ? [...playButtons].find((button) => button.dataset.album === albumId)
+    : null;
+
+  if (releaseButton) {
+    activateRelease(releaseButton, musicSection);
+  } else {
+    musicSection?.scrollIntoView({
+      behavior: reduceMotion.matches ? "auto" : "smooth",
+      block: "start"
+    });
+  }
 });
 
 document.querySelector("[data-year]").textContent = new Date().getFullYear();

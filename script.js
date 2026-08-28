@@ -197,7 +197,7 @@ const player = document.querySelector("#music-player");
 let spotifyController = null;
 let spotifyReady = false;
 let queuedRelease = null;
-let currentAlbumId = "1i4UJj3WxyFzxOMNahmY0j";
+let currentAlbumId = "1WvhcnFCrhbjgsd5tt1UiC";
 
 const startRelease = ({ albumId, releaseTitle }) => {
   if (!spotifyController || !spotifyReady) {

@@ -298,6 +298,13 @@ window.onSpotifyIframeApiReady = (IFrameAPI) => {
     spotifyController.addListener("playback_started", () => {
       playerStatus.textContent = "Now playing";
     });
+
+    spotifyController.addListener("playback_update", (event) => {
+      const paused = event.data.isPaused;
+      const active = [...playButtons].find((b) => b.getAttribute("aria-pressed") === "true");
+      if (active) active.querySelector("span").textContent = paused ? "▶" : "❚❚";
+      if (playerStatus) playerStatus.textContent = paused ? "Paused" : "Now playing";
+    });
   });
 };
 
@@ -312,7 +319,7 @@ const activateRelease = (button, scrollTarget = null) => {
   });
 
   button.setAttribute("aria-pressed", "true");
-  button.querySelector("span").textContent = "♪";
+  button.querySelector("span").textContent = "❚❚";
   playerTitle.textContent = releaseTitle;
   playerStatus.textContent = "Starting playback";
   startRelease({ albumId, releaseTitle });
@@ -327,6 +334,10 @@ playButtons.forEach((button) => {
   button.setAttribute("aria-pressed", "false");
 
   button.addEventListener("click", () => {
+    if (button.getAttribute("aria-pressed") === "true" && spotifyController && spotifyReady) {
+      spotifyController.togglePlay();
+      return;
+    }
     const scrollTarget = window.matchMedia("(max-width: 759px)").matches ? player : null;
     activateRelease(button, scrollTarget);
   });

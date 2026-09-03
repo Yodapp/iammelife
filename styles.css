@@ -2744,3 +2744,20 @@ body.reader-open .mobile-actions {
     display: none;
   }
 }
+
+/* ============================================================
+   Surgical refinements — safe overrides (player untouched)
+   ============================================================ */
+.hero-inscription,.hero-edition,.hero-entry,.portrait-coordinate,.orb,.story-aurora,.book-atmosphere,.book-halo,.becoming-lines,.story-roman,.music-marquee{display:none !important;}
+.hero h1{line-height:0.9;font-size:clamp(3.2rem,13vw,7rem);}
+@media (min-width:760px){.hero h1{font-size:clamp(5rem,9.5vw,8rem);}}
+.hero-release{border-radius:12px;border-color:rgba(234,215,157,0.3);background:linear-gradient(180deg,rgba(22,31,18,0.72),rgba(9,14,8,0.8));box-shadow:0 1rem 2.6rem rgba(0,0,0,0.38);padding:0.9rem 0.9rem 0.9rem 1.15rem;}
+.hero-release:hover{border-color:rgba(234,215,157,0.58);}
+.hero-release-action i{background:rgba(211,176,106,0.16);}
+.hero-content{padding-bottom:clamp(4rem,14vh,7rem);}
+.hero-shade{background:linear-gradient(180deg,rgba(5,8,4,0.08) 12%,rgba(5,8,4,0.32) 50%,rgba(5,8,4,0.9) 82%,rgba(5,8,4,1) 100%),linear-gradient(90deg,rgba(5,8,4,0.4),transparent 62%);}
+
+
+
+/* Sticky player */
+#music-player{position:sticky;bottom:0.75rem;z-index:40;background:rgba(6,9,6,0.94);backdrop-filter:blur(12px);box-shadow:0 1rem 3rem rgba(0,0,0,0.55);}

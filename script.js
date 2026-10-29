@@ -259,7 +259,7 @@ const player = document.querySelector("#music-player");
 let spotifyController = null;
 let spotifyReady = false;
 let queuedRelease = null;
-let currentAlbumId = "5X0QYLtExLlARRJpv7cdVt";
+let currentAlbumId = "1re0sUK63SwqN15m4I0D2L";
 
 const startRelease = ({ albumId, releaseTitle }) => {
   if (!spotifyController || !spotifyReady) {
